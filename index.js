@@ -9,25 +9,25 @@ app.use(express.static("public"));
 
 app.get("/videos", function (req, res) {
   const videoDetailsJSON = fs.readFileSync("./data/video-details.json");
-  let videoDetails = JSON.parse(videoDetailsJSON);
-  let results = videoDetails.map((video) => {
+  const videoDetails = JSON.parse(videoDetailsJSON);
+  const results = videoDetails.map((video) => {
     return {
       id: video.id,
       title: video.title,
       channel: video.channel,
-      image: video.image
+      image: video.image,
     };
   });
   res.send(results);
 });
 
 app.get("/videos/:id", function (req, res) {
-    let id = req.params.id;
-    const videoDetailsJSON = fs.readFileSync("./data/video-details.json");
-    let videoDetails = JSON.parse(videoDetailsJSON);
-    let result = videoDetails.find((video) => {
-     return video.id === id;
-    });
+  const id = req.params.id;
+  const videoDetailsJSON = fs.readFileSync("./data/video-details.json");
+  const videoDetails = JSON.parse(videoDetailsJSON);
+  const result = videoDetails.find((video) => {
+    return video.id === id;
+  });
   res.send(result);
 });
 
