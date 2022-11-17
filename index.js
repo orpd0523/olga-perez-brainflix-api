@@ -7,10 +7,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-app.get("/", function (req, res) {
-  res.send("Welcome to /");
-});
-
 app.get("/videos", function (req, res) {
   const videoDetailsJSON = fs.readFileSync("./data/video-details.json");
   let videoDetails = JSON.parse(videoDetailsJSON);
@@ -26,7 +22,13 @@ app.get("/videos", function (req, res) {
 });
 
 app.get("/videos/:id", function (req, res) {
-  res.send("Welcome to /videos/:id");
+    let id = req.params.id;
+    const videoDetailsJSON = fs.readFileSync("./data/video-details.json");
+    let videoDetails = JSON.parse(videoDetailsJSON);
+    let result = videoDetails.find((video) => {
+     return video.id === id;
+    });
+  res.send(result);
 });
 
 app.post("/videos", function (req, res) {
