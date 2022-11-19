@@ -9,7 +9,7 @@ app.use(express.static("public"));
 
 app.use("/videos", videosRoute);
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log("E. Charles White");
 });
 

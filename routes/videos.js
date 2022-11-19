@@ -32,8 +32,8 @@ router.post("/", function (req, res) {
   const video = {
     id: uuidv4(),
     title: body.title,
-    channel: "Molotov",
-    image: "https://i.scdn.co/image/ab67616d0000b2735e2b069b2306267d474c43dd",
+    channel: "The Weekday",
+    image: "http://localhost:3001/images/image10.jpg",
     description: body.description,
     views: "0",
     likes: "0",
