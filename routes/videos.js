@@ -4,7 +4,7 @@ const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
 
 router.get("/", function (req, res) {
-  const videoDetailsJSON = fs.readFileSync("./data/video-details.json");
+  const videoDetailsJSON = fs.readFileSync("./data/videos.json");
   const videoDetails = JSON.parse(videoDetailsJSON);
   const results = videoDetails.map((video) => {
     return {
@@ -19,7 +19,7 @@ router.get("/", function (req, res) {
 
 router.get("/:id", function (req, res) {
   const id = req.params.id;
-  const videoDetailsJSON = fs.readFileSync("./data/video-details.json");
+  const videoDetailsJSON = fs.readFileSync("./data/videos.json");
   const videoDetails = JSON.parse(videoDetailsJSON);
   const result = videoDetails.find((video) => {
     return video.id === id;
@@ -33,7 +33,7 @@ router.post("/", function (req, res) {
     id: uuidv4(),
     title: body.title,
     channel: "The Weekday",
-    image: "http://localhost:3001/images/image10.jpg",
+    image: body.image,
     description: body.description,
     views: "0",
     likes: "0",
@@ -42,10 +42,10 @@ router.post("/", function (req, res) {
     timestamp: Date.now(),
     comments: [],
   };
-  const videoDetailsJSON = fs.readFileSync("./data/video-details.json");
+  const videoDetailsJSON = fs.readFileSync("./data/videos.json");
   const videoDetails = JSON.parse(videoDetailsJSON);
   const results = [...videoDetails, video];
-  fs.writeFile("./data/video-details.json", JSON.stringify(results), (err) => {
+  fs.writeFile("./data/videos.json", JSON.stringify(results), (err) => {
     if (err) {
       console.error(err);
     }
